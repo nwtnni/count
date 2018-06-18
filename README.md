@@ -1,0 +1,2 @@
+# count
+Global counter generator
