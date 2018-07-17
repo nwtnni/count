@@ -1,12 +1,23 @@
-# count
+# simple-counter
 
-A macro for generating thread-local global counters. Useful for simple ID generation.
+Provides a single macro for generating thread-local global counters by 
+creating a new module with a thread-local static `Cell`. Currently intended 
+to be used with integer types. Useful for basic ID generation.
 
 ## Usage
 
+Add the following dependency to your Cargo.toml file:
+
+```toml
+[dependencies]
+simple-counter = "0.1.0"
+```
+
+And make sure to use the `#[macro_use]` annotation when importing:
+
 ```rust
 #[macro_use]
-extern crate count;
+extern crate simple_counter;
 
 generate_counter!(Counter, usize);
 
@@ -29,17 +40,13 @@ fn main() {
 }
 ```
 
-## Implementation
-
-Creates a new module with a thread-local static `Cell`.
-
 ## Example
 
-Here's a simple unique Temp generator for a compiler:
+Here's a simple unique temp generator for a compiler:
 
 ```rust
 #[macro_use]
-extern crate count;
+extern crate simple_counter;
 
 generate_counter!(TempID, usize);
 
