@@ -32,3 +32,29 @@ fn main() {
 ## Implementation
 
 Creates a new module with a thread-local static `Cell`.
+
+## Example
+
+Here's a simple unique Temp generator for a compiler:
+
+```rust
+#[macro_use]
+extern crate count;
+
+generate_counter!(TempID, usize);
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct Temp {
+    id: usize,
+    name: String,
+}
+
+impl Temp {
+    pub fn from_str(name: &'static str) -> Self {
+        Temp {
+            id: TempID::next(),
+            name: name.to_string(),
+        }
+    }
+}
+```
